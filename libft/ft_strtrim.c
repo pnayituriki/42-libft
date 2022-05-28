@@ -6,61 +6,65 @@
 /*   By: pnayitur <pnayitur@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 20:28:16 by pnayitur          #+#    #+#             */
-/*   Updated: 2022/05/28 13:18:40 by pnayitur         ###   ########.fr       */
+/*   Updated: 2022/05/28 16:31:11 by pnayitur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*remove_sapaces(char const *s1)
+static int	calc_the_start(char const *s1, char const *set)
 {
-	int		n;
-	int		i;
-	char	*ptr;
-
-	n = 0;
-	i = 0;
-	ptr = (char *)malloc(sizeof(char) * ft_strlen((char *)s1));
-	while (s1[n] != '\0')
-	{
-		if (s1[n] != ' ' && s1[n] != '\n' && s1[n] != 't')
-			ptr[i++] = s1[n];
-		n++;
-	}
-	ptr[i] = '\0';
-	return (ptr);
-}
-
-static size_t	get_start_index(char const *s1, char const *set)
-{
-	size_t	start;
+	int	start;
 
 	start = 0;
-	while (s1[start] && ft_strchr(set, s1[start]))
+	while (start < (int)ft_strlen((char *)s1))
+	{
+		if (!ft_strchr(set, s1[start]))
+			break ;
 		start++;
+	}
 	return (start);
 }
 
-static size_t	get_last_index(char const *s1, char const *set)
+static int	calc_the_end(char const *s1, char const *set)
 {
-	size_t	last;
+	int	end;
 
-	last = ft_strlen(s1);
-	while (last && ft_strchr(set, s1[last]))
-		last--;
-	return (last);
+	end = ft_strlen((char *)s1) - 1;
+	while (end > 0)
+	{
+		if (!ft_strchr(set, s1[end]))
+			break ;
+		end--;
+	}
+	return (end);
 }
 
 char	*ft_strtrim(char const *s1, char const *set)
 {
-	size_t	start;
-	size_t	last;
-	char	*new_s1;
+	int		start;
+	int		end;
+	char	*res;
 
-	new_s1 = remove_sapaces(s1);
-	if (!new_s1 || !set)
+	if (!set)
 		return (NULL);
-	start = get_start_index(new_s1, set);
-	last = get_last_index(new_s1, set);
-	return (ft_substr(new_s1, start, last - start + 1));
+	if (!s1)
+	{
+		res = malloc(1 * sizeof(char));
+		res[0] = '\0';
+		return (res);
+	}
+	end = calc_the_end(s1, set);
+	start = calc_the_start(s1, set);
+	if (start > end)
+	{
+		res = malloc(1 * sizeof(char));
+		res[0] = '\0';
+		return (res);
+	}
+	res = malloc((end - start + 1 + 1) * sizeof(char));
+	if (res == NULL)
+		return (NULL);
+	ft_strlcpy(res, (char *)&s1[start], end - start + 1 + 1);
+	return (res);
 }

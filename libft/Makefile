@@ -40,21 +40,21 @@ SRCS	:=	ft_atoi.c			\
 			ft_tolower.c		\
 			ft_toupper.c		\
 
-# SRCBONUS := ft_lstnew.c			\
-# 			ft_lstadd_front.c	\
-# 			ft_lstsize.c		\
-# 			ft_lstlast.c		\
-# 			ft_lstadd_back.c	\
-# 			ft_lstdelone.c		\
-# 			ft_lstclear.c		\
-# 			ft_lstiter.c		\
-# 			ft_lstmap.c			\
+SRCBONUS := ft_lstnew.c			\
+			ft_lstadd_front.c	\
+			ft_lstsize.c		\
+			ft_lstlast.c		\
+			ft_lstadd_back.c	\
+			ft_lstdelone.c		\
+			ft_lstclear.c		\
+			ft_lstiter.c		\
+			ft_lstmap.c			\
 
 OBJS		:= ${SRCS:.c=.o}
 
-# B_OBJS		:= ${SRCBONUS:.c=.o}
+BONUS_OBJS	:= ${SRCBONUS:.c=.o}
 
-.PHONY: bonus all clean fclean re
+.PHONY: 	bonus all clean fclean re
 
 all:		${NAME}
 
@@ -66,13 +66,12 @@ $(NAME):	${OBJS} ${LIBFT}
 			${CC} ${CFLAGS} -c $< -o $@
 
 clean:
-	${RM} ${OBJS}
+	${RM} ${OBJS} $(BONUS_OBJS)
 
 fclean:		clean
 	${RM} $(NAME)
 
 re:			fclean all
 
-so:
-	$(CC) -nostartfiles -fPIC $(CFLAGS) $(SRC)
-	gcc -nostartfiles -shared -o libft.so $(OBJ)
+bonus:			$(OBJS) $(BONUS_OBJS)
+				ar rcs $(NAME) $(OBJS) $(BONUS_OBJS)
