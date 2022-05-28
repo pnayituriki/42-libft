@@ -6,7 +6,7 @@
 /*   By: pnayitur <pnayitur@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 18:31:26 by pnayitur          #+#    #+#             */
-/*   Updated: 2022/05/24 13:08:07 by pnayitur         ###   ########.fr       */
+/*   Updated: 2022/05/28 11:22:38 by pnayitur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,11 @@ void	*ft_memchr(const void *s, int c, size_t n)
 
 	i = 0;
 	str = (unsigned char *)s;
-	if (c == 0)
-		return ("");
-	while (str && i < n && str[i++])
-		if (str[i] == c)
-			return ((char *)str + i);
+	while (i < n)
+	{
+		if (str[i] == (unsigned char)c)
+			return ((void *)str + i);
+		i++;
+	}
 	return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: pnayitur <pnayitur@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 17:09:09 by pnayitur          #+#    #+#             */
-/*   Updated: 2022/05/24 21:30:38 by pnayitur         ###   ########.fr       */
+/*   Updated: 2022/05/28 13:28:07 by pnayitur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@ static int	ft_get_size(int n)
 	len = 0;
 	if (n <= 0)
 		len = 1;
-	else
-		len = 0;
 	while (n != 0)
 	{
 		n = n / 10;
@@ -37,21 +35,22 @@ char	*ft_itoa(int n)
 
 	num = n;
 	digits = ft_get_size(n);
-	if (n < 0)
-	{
-		num *= -1;
-		digits++;
-	}
 	str_num = (char *)malloc(sizeof(char) * (digits + 1));
 	if (!str_num)
-		return (NULL);
-	*(str_num + digits) = 0;
-	while (digits--)
+		return (0);
+	str_num[digits] = '\0';
+	if (num == 0)
+		str_num[0] = '0';
+	while (num != 0 && digits > 0)
 	{
-		*(str_num + digits) = num % 10 + '0';
+		if (num < 0)
+		{
+			num = num * -1;
+			str_num[0] = '-';
+		}
+		str_num[digits - 1] = (num % 10) + '0';
 		num = num / 10;
+		digits--;
 	}
-	if (n < 0)
-		*(str_num + 0) = '-';
 	return (str_num);
 }

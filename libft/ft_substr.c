@@ -6,7 +6,7 @@
 /*   By: pnayitur <pnayitur@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 15:12:48 by pnayitur          #+#    #+#             */
-/*   Updated: 2022/05/24 13:33:10 by pnayitur         ###   ########.fr       */
+/*   Updated: 2022/05/28 12:44:59 by pnayitur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,21 +18,24 @@ char	*ft_substr(char const *s, size_t start, size_t len)
 	size_t	i;
 	char	*ptr;
 
-	ptr = (char *)malloc(sizeof(char) * (len + 1));
-	if ((ptr) == NULL)
+	if (!s)
 		return (NULL);
-	last = start + len;
-	if (len <= 0 || last > ft_strlen(s))
-	{
-		ptr[0] = '\0';
-		return (ptr);
-	}
+	if (start >= ft_strlen(s) || (len == 0))
+		return (ft_calloc(1, sizeof(char)));
+	last = 0;
+	while (last < len && s[(size_t)start + last] != '\0')
+		last++;
+	ptr = (char *)malloc(sizeof(*ptr) * (last + 1));
+	if (!ptr)
+		return (NULL);
 	i = 0;
-	while (start < last)
+	while (last)
 	{
 		ptr[i] = s[start];
-		start++;
 		i++;
+		start++;
+		last--;
 	}
+	ptr[i] = '\0';
 	return (ptr);
 }

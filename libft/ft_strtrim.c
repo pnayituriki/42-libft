@@ -6,7 +6,7 @@
 /*   By: pnayitur <pnayitur@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 20:28:16 by pnayitur          #+#    #+#             */
-/*   Updated: 2022/05/24 13:32:36 by pnayitur         ###   ########.fr       */
+/*   Updated: 2022/05/28 13:18:40 by pnayitur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*remove_sapaces(char const *s1)
 
 	n = 0;
 	i = 0;
-	ptr = (char *)malloc(sizeof(char) * (1));
+	ptr = (char *)malloc(sizeof(char) * ft_strlen((char *)s1));
 	while (s1[n] != '\0')
 	{
 		if (s1[n] != ' ' && s1[n] != '\n' && s1[n] != 't')

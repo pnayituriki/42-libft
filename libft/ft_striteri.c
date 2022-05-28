@@ -6,7 +6,7 @@
 /*   By: pnayitur <pnayitur@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 00:22:33 by pnayitur          #+#    #+#             */
-/*   Updated: 2022/05/24 12:57:45 by pnayitur         ###   ########.fr       */
+/*   Updated: 2022/05/28 13:32:09 by pnayitur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 void	ft_striteri(char *s, void (*f)(unsigned int, char *))
 {
-	unsigned int	index;
+	unsigned int	i;
 
-	if (!s)
+	if (!s || !f)
 		return ;
-	index = 0;
-	while (s[index++])
-		f(index, &s[index]);
+	i = -1;
+	while (s[++i])
+		(*f)(i, &s[i]);
 }

@@ -6,7 +6,7 @@
 /*   By: pnayitur <pnayitur@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 17:34:58 by pnayitur          #+#    #+#             */
-/*   Updated: 2022/05/24 12:43:42 by pnayitur         ###   ########.fr       */
+/*   Updated: 2022/05/28 11:37:35 by pnayitur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ char	*ft_strchr(const char *s, int c)
 	int	i;
 
 	i = -1;
-	if (c == 0)
-		return ("");
-	while (s && s[++i])
-		if (s[i] == c)
+	while (s[++i])
+		if (s[i] == (char)c)
 			return ((char *)s + i);
+	if (c == 0)
+		return ((char *)s + i);
 	return (NULL);
 }

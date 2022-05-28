@@ -6,7 +6,7 @@
 /*   By: pnayitur <pnayitur@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 23:12:57 by pnayitur          #+#    #+#             */
-/*   Updated: 2022/05/24 21:39:24 by pnayitur         ###   ########.fr       */
+/*   Updated: 2022/05/28 13:23:10 by pnayitur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,20 @@
 
 static int	ft_wordcount(char const *s, char c)
 {
-	int	len;
-	int	i;
+	size_t	i;
+	size_t	words;
 
 	i = 0;
-	len = 0;
+	words = 0;
 	if (s == 0 || s[0] == '\0')
 		return (0);
-	while (s[i] != '\0')
+	while (s[i] != 0)
 	{
 		if (s[i] != c && (i == 0 || s[i - 1] == c))
-			len++;
+			words++;
 		i++;
 	}
-	return (len);
+	return (words);
 }
 
 char	**ft_split(char const *s, char c)
@@ -37,7 +37,7 @@ char	**ft_split(char const *s, char c)
 	int		j;
 	int		start;
 
-	arr = malloc(sizeof(char *) * (ft_wordcount(s, c) + 1));
+	arr = malloc(sizeof(char *) * (ft_numofstr(s, c) + 1));
 	if (!arr || !s)
 		return (NULL);
 	j = 0;

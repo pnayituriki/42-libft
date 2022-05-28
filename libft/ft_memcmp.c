@@ -6,7 +6,7 @@
 /*   By: pnayitur <pnayitur@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 18:50:37 by pnayitur          #+#    #+#             */
-/*   Updated: 2022/05/24 13:12:30 by pnayitur         ###   ########.fr       */
+/*   Updated: 2022/05/27 17:41:49 by pnayitur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,9 @@ int	ft_memcmp(const void *s1, const void *s2, size_t n)
 	i = 0;
 	s1_copy = (unsigned char *)s1;
 	s2_copy = (unsigned char *)s2;
-	while (s1_copy[i] && i < n)
-	{
-		if (s1_copy[i] != s2_copy[i])
-			return ((unsigned char)s1_copy[i] - (unsigned char)s2_copy[i]);
+	while (s1_copy[i] == s2_copy[i] && i < n)
 		i++;
-	}
-	return (0);
+	if (i == n)
+		return (0);
+	return ((unsigned char)s1_copy[i] - (unsigned char)s2_copy[i]);
 }
